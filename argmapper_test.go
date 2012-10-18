@@ -28,3 +28,30 @@ func Test_mapArgs(t *testing.T) {
 		}
 	}
 }
+
+func Test_mapArgs_nuanced(t *testing.T) {
+	m := New([]string{
+		"subcommand",         // not an argument
+		"--foo=bar",          // first argument
+		"--follow",           // second argument
+		"--silent",           // third argument
+		"--path", "./foobar", // fourth argument
+		"something-else",     // not an argument
+	})
+
+	if len(m) != 4 {
+		t.Fatalf("got %#v", len(m))
+	}
+
+	if v, ok := m["foo"]; !ok || v != "bar" {
+		t.Fatalf("got %#v", v)
+	}
+
+	if v, ok := m["follow"]; !ok || v != "" {
+		t.Fatalf("got %#v", v)
+	}
+
+	if v, ok := m["silent"]; !ok || v != "" {
+		t.Fatalf("got %#v", v)
+	}
+}

@@ -37,7 +37,7 @@ nextarg:
 
 			// It must have a value, which might be the next argument.
 			remaining := args[i+1:]
-			if v == "" && len(remaining) > 0 {
+			if v == "" && len(remaining) > 0 && remaining[0][0] != '-' {
 				v = remaining[0] // value is the next arg
 			}
 
