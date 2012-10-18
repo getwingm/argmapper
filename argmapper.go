@@ -9,7 +9,7 @@ func New(args []string) (m Map) {
 		return
 	}
 
-nextarg:
+nextopt:
 	for i, s := range args {
 
 		// does s look like an option?
@@ -24,7 +24,7 @@ nextarg:
 
 			k = s[num_minuses:]
 			if len(k) == 0 || k[0] == '-' || k[0] == '=' {
-				continue nextarg
+				continue nextopt
 			}
 
 			for i := 1; i < len(k); i++ { // equals cannot be first
@@ -35,7 +35,8 @@ nextarg:
 				}
 			}
 
-			// It must have a value, which might be the next argument.
+			// It must have a value, which might be the next arg,
+			// assuming the next arg isn't an option too.
 			remaining := args[i+1:]
 			if v == "" && len(remaining) > 0 && remaining[0][0] != '-' {
 				v = remaining[0] // value is the next arg

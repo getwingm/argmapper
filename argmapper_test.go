@@ -31,12 +31,12 @@ func Test_mapArgs(t *testing.T) {
 
 func Test_mapArgs_nuanced(t *testing.T) {
 	m := New([]string{
-		"subcommand",         // not an argument
-		"--foo=bar",          // first argument
-		"--follow",           // second argument
-		"-silent",            // third argument
-		"--path", "./foobar", // fourth argument
-		"something-else", // not an argument
+		"subcommand",         // not an option
+		"--foo=bar",          // first option
+		"--follow",           // second option
+		"-silent",            // third option
+		"--path", "./foobar", // fourth option
+		"iam-something-else", // not an option
 	})
 
 	if len(m) != 4 {
